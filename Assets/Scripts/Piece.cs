@@ -24,5 +24,41 @@ public class Piece : MonoBehaviour
         }
 
     }
+
+    private void Update()
+    {
+        this.board.Clear(this);
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Move(Vector2Int.left);
+        } else if (Input.GetKeyDown(KeyCode.D))
+        {
+            Move(Vector2Int.right);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Move(Vector2Int.down);
+        }
+
+        this.board.Set(this);
+    }
+
+    private bool Move(Vector2Int translation)
+    {
+        Vector3Int newPosition = this.position;
+        newPosition.x += translation.x;
+        newPosition.y += translation.y;
+
+        bool valid = this.board.isValidPosition(this, newPosition);
+
+        if (valid)
+        {
+            this.position = newPosition;
+        }
+
+        return valid;
+    }
 }
 
