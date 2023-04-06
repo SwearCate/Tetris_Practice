@@ -10,6 +10,8 @@ public class Board : MonoBehaviour
     public Vector3Int spawnPosition;
     public Vector2Int boardSize = new Vector2Int(10, 20);
 
+    public int points;
+
     public RectInt Bounds
     {
         get
@@ -113,6 +115,7 @@ public class Board : MonoBehaviour
             if (isLineFull(row))
             {
                 LineClear(row);
+                ScoreManager.score = ScoreManager.score + points;
             }
             else
             {
